@@ -1,8 +1,8 @@
 package com.android.giphyassessment.di
 
+import com.android.giphyassessment.BuildConfig
 import com.android.giphyassessment.network.ApiService
 import com.android.giphyassessment.utils.DispatcherProvider
-import com.squareup.picasso.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,13 +20,13 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-//    @Provides
-//    @Singleton
-//    fun provideCurrencyApi(): ApiService = Retrofit.Builder()
-//        .baseUrl(BuildConfig.baseUrl)
-//        .addConverterFactory(GsonConverterFactory.create())
-//        .build()
-//        .create(ApiService::class.java)
+    @Provides
+    @Singleton
+    fun provideCurrencyApi(): ApiService = Retrofit.Builder()
+        .baseUrl(BuildConfig.baseUrl)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+        .create(ApiService::class.java)
 
     @Provides
     @Singleton
