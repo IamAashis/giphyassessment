@@ -54,6 +54,7 @@ class GiphyAdapter(
                 val binding = (holder as GiphyVH).binding
                 val giphyItems = giphyList[position]
 
+                binding.imvGiphy.clipToOutline = true
                 context?.let {
                     Glide.with(it)
                         .load(giphyItems.images?.downsized_medium?.url)

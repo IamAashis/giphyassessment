@@ -37,14 +37,22 @@ class FavouriteFragment : BaseFragment<FragmentFavouriteBinding, FavouriteViewMo
     private fun setup() {
         initRecyclerView()
         initObserver()
+        getFavData()
+    }
+
+    fun getFavData() {
         favouriteViewModel.getGiphyData(context)
     }
 
     private fun initObserver() {
         favouriteViewModel.giphyList.observe(viewLifecycleOwner) { response ->
-            if (response != null) {
+            if (!response.isNullOrEmpty()) {
+                giphyList.clear()
                 giphyList.addAll(response)
                 favAdapter.notifyDataSetChanged()
+                binding?.txvGifs.viewGone()
+            } else {
+                binding?.txvGifs.viewVisible()
             }
         }
 
@@ -60,8 +68,9 @@ class FavouriteFragment : BaseFragment<FragmentFavouriteBinding, FavouriteViewMo
     private fun initRecyclerView() {
         val layoutManager = GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
         favAdapter = FavAdapter(requireContext(), giphyList) { position ->
-
-
+            context?.let { favouriteViewModel.deleteGiphyById(it, giphyList[position].id ?: "") }
+            giphyList.removeAt(position)
+            favAdapter.notifyDataSetChanged()
         }
         binding?.rcvGiphy?.layoutManager = layoutManager
         binding?.rcvGiphy?.adapter = favAdapter

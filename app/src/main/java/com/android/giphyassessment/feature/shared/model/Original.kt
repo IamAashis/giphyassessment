@@ -5,4 +5,5 @@ package com.android.giphyassessment.feature.shared.model
  */
 class Original {
     var url: String? = null
+    var width: String? = null
 }

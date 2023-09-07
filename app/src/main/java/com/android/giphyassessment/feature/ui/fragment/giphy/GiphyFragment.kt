@@ -56,9 +56,17 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
     private fun setup() {
         initRecyclerView()
         initTextChangeListener()
-        context?.let { giphyViewModel.getGiphy(it, 1) }
+        getTrendingData()
         initObserver()
+        initListener()
+    }
+
+    private fun initListener() {
         binding?.srlSwipeRefresh?.setOnRefreshListener(this)
+    }
+
+    fun getTrendingData() {
+        context?.let { giphyViewModel.getGiphy(it, 1) }
     }
 
     private fun initObserver() {

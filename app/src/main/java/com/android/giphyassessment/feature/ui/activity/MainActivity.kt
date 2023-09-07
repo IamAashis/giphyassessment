@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.favourite),
             getString(R.string.favourite)
         )
-        binding.vewPager.offscreenPageLimit = 0
+//        binding.vewPager.offscreenPageLimit = 1
 
         binding.vewPager.adapter = tabAdapter
     }
@@ -84,22 +84,18 @@ class MainActivity : AppCompatActivity() {
                 when (tab?.position) {
                     0 -> {
                         binding.tblLayout.getTabAt(0)?.setIcon(R.drawable.gif_box)
-                        /*   if (PreferenceUtils.getLoggedInStatus(this@NotificationActivity) == true) {
-                               tblNotifs.getTabAt(1)?.setIcon(R.drawable.ic_order_unselected)
-                               tblNotifs.getTabAt(2)?.setIcon(R.drawable.ic_promo_unselected)
-                           } else {
-                               tblNotifs.getTabAt(1)?.setIcon(R.drawable.ic_promo_unselected)
-                           }*/
+                        val fragment = tabAdapter.getItem(0)
+                        if (fragment is GiphyFragment) {
+                            fragment.getTrendingData()
+                        }
                     }
 
                     1 -> {
                         binding.tblLayout.getTabAt(1)?.setIcon(R.drawable.ic_favorite)
-                        /*  if (PreferenceUtils.getLoggedInStatus(this@NotificationActivity) == true) {
-                              tblNotifs.getTabAt(1)?.setIcon(R.drawable.ic_order_selected)
-                              tblNotifs.getTabAt(2)?.setIcon(R.drawable.ic_promo_unselected)
-                          } else {
-                              tblNotifs.getTabAt(1)?.setIcon(R.drawable.ic_promo_selected)
-                          }*/
+                        val fragment = tabAdapter.getItem(1)
+                        if (fragment is FavouriteFragment) {
+                            fragment.getFavData()
+                        }
                     }
 
                 }

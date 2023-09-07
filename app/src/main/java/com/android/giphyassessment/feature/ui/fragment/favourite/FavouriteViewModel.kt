@@ -39,43 +39,21 @@ class FavouriteViewModel @Inject constructor(
     fun getGiphyData(context: Context?) {
         viewModelScope.launch(dispatcher.io) {
             _loading.postValue(true)
-//            giphyRepository.getGiphyData(context)
 
             try {
                 val result = giphyRepository.getGiphyData(context)
-                // Handle the success result
                 if (result != null) {
                     _giphyList.postValue(result)
                     _loading.postValue(false)
                 } else {
-                    // Handle the case where result is null
+
                 }
             } catch (e: Exception) {
-                // Handle the failure (exception) here
+
             } finally {
                 _loading.postValue(false)
             }
 
-        }
-    }
-
-    private fun updateFavFromDb(giphy: Giphy?, giphyDataDb: List<GiphyModel>?): Giphy {
-        val giphyData = giphy?.data
-
-        for (i in giphyData?.indices!!) {
-            for (k in giphyDataDb?.indices!!) {
-                if (giphyData[i].id == giphyDataDb[k].id) {
-                    giphyData[i].isFav = true
-                }
-            }
-        }
-
-        return giphy
-    }
-
-    fun insertData(context: Context, giphyModel: GiphyModel) {
-        viewModelScope.launch {
-            giphyRepository.insertData(context, giphyModel)
         }
     }
 

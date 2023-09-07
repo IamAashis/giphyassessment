@@ -12,4 +12,5 @@
     <string name="gifsTrending">GifsTrending</string>
     <string name="favourite">favourite</string>
     <string name="thisIsImage">this is image</string>
+    <string name="noFavouriteGifs">No Favourite Gifs</string>
 </resources>

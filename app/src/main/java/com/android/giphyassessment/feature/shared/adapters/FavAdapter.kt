@@ -25,32 +25,32 @@ class FavAdapter(
         AdapterFavouriteBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-    ) {onItemClicked(it)}
+    ) { onItemClicked(it) }
 
     override fun onBindViewHolder(holder: FavouriteVH, position: Int) {
         val favItems = favList[position]
         val binding = holder.binding
-        context?.let {
-            Glide.with(it)
-                .load(favItems.images?.downsized_medium?.url)
-                .into(binding.imvGiphy)
-        }
+        binding.imvGiphy.clipToOutline = true
 
-        if (favItems.isFav == true) {
-            binding.imbFav.setImageDrawable(context.let {
+        Glide.with(context)
+            .load(favItems.images?.downsized_medium?.url)
+            .into(binding.imvGiphy)
+
+ /*       if (favItems.isFav == true) {
+            binding.imbFav.setImageDrawable(
                 ContextCompat.getDrawable(
-                    it,
+                    context,
                     R.drawable.ic_favorite
                 )
-            })
+            )
         } else {
-            binding.imbFav.setImageDrawable(context.let {
+            binding.imbFav.setImageDrawable(
                 ContextCompat.getDrawable(
-                    it,
+                    context,
                     R.drawable.ic_unfavorite
                 )
-            })
-        }
+            )
+        }*/
     }
 
     override fun getItemCount(): Int = favList.size
