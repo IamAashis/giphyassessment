@@ -62,7 +62,7 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
     }
 
     private fun initObserver() {
-        giphyViewModel.eventList.observe(viewLifecycleOwner) { response ->
+        giphyViewModel.giphyList.observe(viewLifecycleOwner) { response ->
 
             if (response != null) {
                 if (!isLoading) {

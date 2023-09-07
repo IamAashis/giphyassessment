@@ -21,9 +21,8 @@ import com.bumptech.glide.Glide
 class GiphyAdapter(
     var context: Context?,
     private var giphyList: MutableList<GiphyModel>,
-    private val onQuizClicked: (position: Int) -> Unit
+    private val onItemClicked: (position: Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var itemChecked: Boolean? = false
     private var isLoadingAdded = false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -35,7 +34,7 @@ class GiphyAdapter(
                     )
                 )
                 {
-                    onQuizClicked(it)
+                    onItemClicked(it)
                 }
             }
 

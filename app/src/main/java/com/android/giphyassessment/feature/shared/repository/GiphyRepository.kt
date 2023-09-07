@@ -23,7 +23,6 @@ import javax.inject.Inject
 class GiphyRepository @Inject constructor(private val api: ApiService) : BaseRepository() {
 
     var appDatabase: AppDatabase? = null
-    var giphyModel: LiveData<List<GiphyModel>>? = null
 
     suspend fun getGiphy(offset: Int): Resources<Giphy> {
         return try {
@@ -66,9 +65,9 @@ class GiphyRepository @Inject constructor(private val api: ApiService) : BaseRep
         }
     }
 
-    suspend fun getGiphyData(context: Context): List<GiphyModel>? {
+    suspend fun getGiphyData(context: Context?): List<GiphyModel>? {
 
-        appDatabase = initializeDB(context.applicationContext)
+        appDatabase = initializeDB(context?.applicationContext)
         return withContext(IO) {
             appDatabase?.appDao()?.getAllItems()
         }

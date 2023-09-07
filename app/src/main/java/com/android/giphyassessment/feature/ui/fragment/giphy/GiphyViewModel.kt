@@ -26,14 +26,14 @@ class GiphyViewModel @Inject constructor(
     private val giphyRepository: GiphyRepository,
     private val dispatcher: DispatcherProvider
 ) : BaseViewModel() {
-    private val _eventList = MutableLiveData<Giphy?>()
-    val eventList: LiveData<Giphy?> = _eventList
+    private val _giphyList = MutableLiveData<Giphy?>()
+    val giphyList: LiveData<Giphy?> = _giphyList
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
 
-    private val _showError = MutableLiveData<String>()
-    val showError: LiveData<String> = _showError
+/*    private val _showError = MutableLiveData<String>()
+    val showError: LiveData<String> = _showError*/
 
     fun getGiphy(context: Context, offset: Int) {
         viewModelScope.launch(dispatcher.io) {
@@ -47,7 +47,7 @@ class GiphyViewModel @Inject constructor(
             val withFav = updateFavFromDb(response.data, responseDb)
             if (response.status == Status.SUCCESS) {
                 _loading.postValue(false)
-                _eventList.postValue(
+                _giphyList.postValue(
                     withFav
                 )
             }
@@ -80,7 +80,7 @@ class GiphyViewModel @Inject constructor(
             giphyRepository.searchGiphy(search, offset)
                 .onSuccess { eventData ->
                     _loading.postValue(false)
-                    _eventList.postValue(
+                    _giphyList.postValue(
                         eventData
                     )
                 }.onFailure { throwable ->

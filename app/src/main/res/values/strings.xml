@@ -11,4 +11,5 @@
     <string name="searchHint">Search Your Fav Emoji....</string>
     <string name="gifsTrending">GifsTrending</string>
     <string name="favourite">favourite</string>
+    <string name="thisIsImage">this is image</string>
 </resources>
