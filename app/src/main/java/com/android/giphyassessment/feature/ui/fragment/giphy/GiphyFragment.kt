@@ -2,6 +2,8 @@ package com.android.giphyassessment.feature.ui.fragment.giphy
 
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -23,6 +25,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Timer
+import java.util.TimerTask
 
 /**
  * Created by Aashis on 05,September,2023
@@ -151,6 +155,25 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
             override fun showFabIcon() {}
 
             override fun hideFabIcon() {}
+        })
+    }
+
+    private fun initTextChangeListener() {
+        binding?.edtSearch?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if (!p0.isNullOrEmpty()) {
+
+
+                } else {
+
+                }
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
         })
     }
 }

@@ -2,10 +2,11 @@
     <string name="app_name">GiphyAssessment</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="error_no_wifi">No internet</string>
-    <string name="error_no_wifi_description">Please check your internet connection and try again.</string>
-    <string name="session_expired_description">Oops! Your session has expired. Please, login again to continue.</string>
-    <string name="error_default">Something went wrong, Please try again!</string>
-    <string name="session_expired">Session Expired</string>
+    <string name="errorNoWifi">No internet</string>
+    <string name="errorNoWifiDescription">Please check your internet connection and try again.</string>
+    <string name="sessionExpiredDescription">Oops! Your session has expired. Please, login again to continue.</string>
+    <string name="errorDefault">Something went wrong, Please try again!</string>
+    <string name="sessionExpired">Session Expired</string>
     <string name="error">Error</string>
+    <string name="searchHint">Search Your Fav Emoji....</string>
 </resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="marginTen">10dp</dimen>
+    <dimen name="marginFourteen">14dp</dimen>
+    <dimen name="marginFour">4dp</dimen>
+    <dimen name="textSizeTwelve">12sp</dimen>
+
+</resources>

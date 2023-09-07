@@ -50,23 +50,23 @@ abstract class BaseActivity<BD : ViewBinding, VM : BaseViewModel> : AppCompatAct
         when (errorEnum) {
             ErrorEnum.NoWifi -> {
                 showMessageDialog(
-                    R.string.error_no_wifi, R.string.error_no_wifi_description, okAction
+                    R.string.errorNoWifi, R.string.errorNoWifiDescription, okAction
                 )
             }
 
             ErrorEnum.SessionExpired -> {
                 showMessageDialog(
-                    R.string.session_expired, R.string.session_expired_description, okAction
+                    R.string.sessionExpired, R.string.sessionExpiredDescription, okAction
                 )
             }
 
             ErrorEnum.DefaultError -> {
-                showMessageDialog(R.string.error, R.string.error_default, okAction)
+                showMessageDialog(R.string.error, R.string.errorDefault, okAction)
             }
 
             else -> {
                 showMessageDialog(
-                    R.string.error, R.string.error_default, okAction
+                    R.string.error, R.string.errorDefault, okAction
                 )
             }
         }

@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".feature.ui.activity.MainActivity">
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tblLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tblLayout"
         android:layout_width="match_parent"
@@ -14,9 +22,5 @@
         app:tabGravity="fill"
         app:tabMode="scrollable" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/tblLayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
