@@ -9,4 +9,5 @@ object ApiConstants {
     const val apikey = "api_key"
     const val limit = "limit"
     const val offset = "offset"
+    const val q = "q"
 }

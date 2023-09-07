@@ -55,6 +55,7 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
 
     private fun setup() {
         initRecyclerView()
+        initTextChangeListener()
         context?.let { giphyViewModel.getGiphy(it, 1) }
         initObserver()
         binding?.srlSwipeRefresh?.setOnRefreshListener(this)
@@ -66,9 +67,9 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
             if (response != null) {
                 if (!isLoading) {
                     response?.data?.let { giphyList.addAll(it) }
-                    var totalPages = response.pagination.total_count
-                    var perPage = response.pagination.count
-                    var questionList = response.data
+                    val totalPages = response.pagination.total_count
+                    val perPage = response.pagination.count
+                    val questionList = response.data
                     if (!questionList.isNullOrEmpty()) {
 
                         if (totalPages != null) {
@@ -103,7 +104,7 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
         }
 
         giphyViewModel.loading.observe(viewLifecycleOwner) {
-            if (it == true) {
+            if (it == true && !isLoading) {
                 binding?.prbGiphy.viewVisible()
             } else {
                 binding?.prbGiphy.viewGone()
@@ -162,10 +163,14 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
         binding?.edtSearch?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (!p0.isNullOrEmpty()) {
-
-
+                    context?.let {
+                        giphyViewModel.searchGiphy(
+                            1,
+                            binding?.edtSearch?.text.toString(),
+                        )
+                    }
                 } else {
-
+                    context?.let { giphyViewModel.getGiphy(it, 1) }
                 }
             }
 

@@ -16,11 +16,15 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tblLayout"
+        style="@style/TabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:tabGravity="fill"
-        app:tabMode="scrollable" />
-
-
+        app:tabIndicatorColor="@color/tabIndicatorColor"
+        app:tabIconTint="@color/tabIndicatorColor"
+        app:tabInlineLabel="true"
+        app:tabMode="fixed" />
 </androidx.constraintlayout.widget.ConstraintLayout>

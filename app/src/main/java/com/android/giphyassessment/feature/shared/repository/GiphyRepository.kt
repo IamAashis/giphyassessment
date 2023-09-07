@@ -39,6 +39,20 @@ class GiphyRepository @Inject constructor(private val api: ApiService) : BaseRep
         }
     }
 
+    suspend fun searchGiphy(search: String, offset: Int): Resources<Giphy> {
+        return try {
+            val response = api.searchGiphy(search = search, offset = offset)
+            val result = response.body()
+            if (response.isSuccessful && result != null) {
+                Resources.Success(result)
+            } else {
+                Resources.Error(getError(response.code(), response.errorBody()?.string()))
+            }
+        } catch (e: Exception) {
+            Resources.Error(getError(e))
+        }
+    }
+
     fun initializeDB(context: Context?): AppDatabase? {
         return AppDatabase.getAppDatabase(context)
     }

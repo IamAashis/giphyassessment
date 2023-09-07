@@ -9,4 +9,6 @@
     <string name="sessionExpired">Session Expired</string>
     <string name="error">Error</string>
     <string name="searchHint">Search Your Fav Emoji....</string>
+    <string name="gifsTrending">GifsTrending</string>
+    <string name="favourite">favourite</string>
 </resources>

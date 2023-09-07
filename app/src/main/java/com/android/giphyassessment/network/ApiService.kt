@@ -19,4 +19,12 @@ interface ApiService {
         @Query(ApiConstants.limit) limit: Int = 10,
         @Query(ApiConstants.offset) offset: Int?
     ): Response<Giphy>
+
+    @GET(ApiConstants.search)
+    suspend fun searchGiphy(
+        @Query(ApiConstants.apikey) apiKey: String = BuildConfig.apiKey,
+        @Query(ApiConstants.limit) limit: Int = 10,
+        @Query(ApiConstants.q) search: String? = null,
+        @Query(ApiConstants.offset) offset: Int?
+    ): Response<Giphy>
 }

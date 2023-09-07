@@ -11,6 +11,8 @@ import com.android.giphyassessment.feature.shared.model.GiphyModel
 import com.android.giphyassessment.feature.shared.repository.GiphyRepository
 import com.android.giphyassessment.utils.DispatcherProvider
 import com.android.giphyassessment.utils.enums.Status
+import com.android.giphyassessment.utils.exceptions.onFailure
+import com.android.giphyassessment.utils.exceptions.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -69,6 +71,22 @@ class GiphyViewModel @Inject constructor(
                        _loading.postValue(false)
                        performActionOnException(throwable) {}
                    }*/
+        }
+    }
+
+    fun searchGiphy(offset: Int, search: String) {
+        viewModelScope.launch(dispatcher.io) {
+            _loading.postValue(true)
+            giphyRepository.searchGiphy(search, offset)
+                .onSuccess { eventData ->
+                    _loading.postValue(false)
+                    _eventList.postValue(
+                        eventData
+                    )
+                }.onFailure { throwable ->
+                    _loading.postValue(false)
+                    performActionOnException(throwable) {}
+                }
         }
     }
 
