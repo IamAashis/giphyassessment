@@ -5,9 +5,12 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.android.giphyassessment.database.AppDao
+import com.android.giphyassessment.database.AppDatabase
 import com.android.giphyassessment.databinding.FragmentGiphyBinding
 import com.android.giphyassessment.feature.shared.adapters.GiphyAdapter
 import com.android.giphyassessment.feature.shared.base.BaseFragment
@@ -16,6 +19,10 @@ import com.android.giphyassessment.utils.PaginationScrollListener
 import com.android.giphyassessment.utils.extensions.viewGone
 import com.android.giphyassessment.utils.extensions.viewVisible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Created by Aashis on 05,September,2023
@@ -75,7 +82,7 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
                         }
                     }
                     giphyAdapter.notifyDataSetChanged()
-                }else{
+                } else {
                     giphyAdapter.removeLoadingFooter()
                     isLoading = false
                     giphyAdapter.addAll(response?.data)
@@ -109,7 +116,7 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
     private fun initRecyclerView() {
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         giphyAdapter = GiphyAdapter(context, giphyList) { position ->
-
+            context?.let { giphyViewModel.insertData(it, giphyList[position]) }
         }
         binding?.rcvGiphy?.layoutManager = layoutManager
         binding?.rcvGiphy?.adapter = giphyAdapter
@@ -125,7 +132,6 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
                 isLoading = true
                 currentPage += 1
                 Handler().postDelayed({ giphyViewModel.getGiphy(currentPage) }, 1500)
-                // mocking network delay for API call
             }
 
             override fun isFabSeen(): Boolean = true

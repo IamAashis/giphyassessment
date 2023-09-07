@@ -1,6 +1,7 @@
 package com.android.giphyassessment.feature.shared.base
 
 import com.android.giphyassessment.feature.shared.model.ErrorResponse
+import com.android.giphyassessment.feature.shared.model.GiphyModel
 import com.android.giphyassessment.utils.constants.ErrorConstants
 import com.android.giphyassessment.utils.constants.HttpCodeConstants
 import com.android.giphyassessment.utils.exceptions.UnAuthorizedException

@@ -1,10 +1,12 @@
 package com.android.giphyassessment.feature.ui.fragment.giphy
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.giphyassessment.feature.shared.base.BaseViewModel
 import com.android.giphyassessment.feature.shared.model.Giphy
+import com.android.giphyassessment.feature.shared.model.GiphyModel
 import com.android.giphyassessment.feature.shared.repository.GiphyRepository
 import com.android.giphyassessment.utils.DispatcherProvider
 import com.android.giphyassessment.utils.exceptions.onFailure
@@ -45,5 +47,9 @@ class GiphyViewModel @Inject constructor(
                     performActionOnException(throwable) {}
                 }
         }
+    }
+
+    fun insertData(context: Context, giphyModel: GiphyModel) {
+        giphyRepository.insertData(context, giphyModel)
     }
 }

@@ -9,4 +9,10 @@ import com.android.giphyassessment.feature.shared.base.BaseViewHolder
 class GiphyVH(
     val binding: AdapterGiphyBinding,
     private val onUserClicked: (position: Int) -> Unit
-) : BaseViewHolder(binding.root)
+) : BaseViewHolder(binding.root) {
+    init {
+        binding.imbFav.setOnClickListener {
+            onUserClicked(adapterPosition)
+        }
+    }
+}
