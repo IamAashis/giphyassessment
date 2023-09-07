@@ -8,8 +8,6 @@ import com.android.giphyassessment.feature.shared.adapters.TabLayoutAdapter
 import com.android.giphyassessment.feature.ui.fragment.favourite.FavouriteFragment
 import com.android.giphyassessment.feature.ui.fragment.giphy.GiphyFragment
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -18,8 +16,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     val tabAdapter = TabLayoutAdapter(supportFragmentManager)
-    var giphyFragment = GiphyFragment()
-    var favouriteFragment = FavouriteFragment()
+    private var giphyFragment = GiphyFragment()
+    private var favouriteFragment = FavouriteFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,22 +31,6 @@ class MainActivity : AppCompatActivity() {
         binding.tblLayout.setupWithViewPager(binding.vewPager)
         setTabIcons()
         initTabLayout()
-        /*     binding.tblLayout.addTab(binding.tblLayout.newTab().setText("Giphy"));
-             binding.tblLayout.addTab(binding.tblLayout.newTab().setText("Favourite"));
-
-
-             val adapter = TabLayoutAdapter(this, supportFragmentManager, binding.tblLayout.tabCount)
-             binding.vewPager.adapter = adapter
-             binding.vewPager.addOnPageChangeListener(TabLayoutOnPageChangeListener(binding.tblLayout))
-
-             binding.tblLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
-                 override fun onTabSelected(tab: TabLayout.Tab) {
-                     binding.vewPager.setCurrentItem(tab.position)
-                 }
-
-                 override fun onTabUnselected(tab: TabLayout.Tab) {}
-                 override fun onTabReselected(tab: TabLayout.Tab) {}
-             })*/
     }
 
     private fun setTabIcons() {
@@ -97,7 +79,6 @@ class MainActivity : AppCompatActivity() {
                             fragment.getFavData()
                         }
                     }
-
                 }
             }
         })

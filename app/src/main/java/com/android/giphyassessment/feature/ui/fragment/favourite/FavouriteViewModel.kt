@@ -5,15 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.giphyassessment.feature.shared.base.BaseViewModel
-import com.android.giphyassessment.feature.shared.model.Giphy
 import com.android.giphyassessment.feature.shared.model.GiphyModel
 import com.android.giphyassessment.feature.shared.repository.GiphyRepository
 import com.android.giphyassessment.utils.DispatcherProvider
-import com.android.giphyassessment.utils.enums.Status
-import com.android.giphyassessment.utils.exceptions.onFailure
-import com.android.giphyassessment.utils.exceptions.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -48,7 +43,7 @@ class FavouriteViewModel @Inject constructor(
                 } else {
 
                 }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
 
             } finally {
                 _loading.postValue(false)

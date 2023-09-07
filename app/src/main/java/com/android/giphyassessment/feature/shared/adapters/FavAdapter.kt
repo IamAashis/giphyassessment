@@ -3,8 +3,6 @@ package com.android.giphyassessment.feature.shared.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import com.android.giphyassessment.R
 import com.android.giphyassessment.databinding.AdapterFavouriteBinding
 import com.android.giphyassessment.feature.shared.base.BaseAdapter
 import com.android.giphyassessment.feature.shared.model.GiphyModel

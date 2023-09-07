@@ -3,7 +3,6 @@ package com.android.giphyassessment.feature.shared.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.android.giphyassessment.R
@@ -105,18 +104,10 @@ class GiphyAdapter(
         }
     }
 
-    fun add(r: GiphyModel) {
+    private fun add(r: GiphyModel) {
         giphyList.add(r)
         notifyItemInserted(giphyList.size - 1)
     }
-
-    /*   override fun getItemViewType(position: Int): Int {
-           return if (generalQuizList[position].type == "quiz") {
-               CategoryConstants.favItemSection
-           } else {
-               CategoryConstants.loadingSection
-           }
-       }*/
 
     override fun getItemViewType(position: Int): Int {
         return when (giphyList[position].types) {
@@ -135,13 +126,13 @@ class GiphyAdapter(
 
         if (giphyList[position].types == "loading") {
             if (result != null) {
-                giphyList?.removeAt(position)
+                giphyList.removeAt(position)
                 notifyItemRemoved(position)
             }
         }
     }
 
-    fun getItem(position: Int): GiphyModel? {
-        return giphyList?.get(position)
+    private fun getItem(position: Int): GiphyModel {
+        return giphyList[position]
     }
 }
