@@ -3,7 +3,9 @@ package com.android.giphyassessment.feature.shared.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.android.giphyassessment.R
 import com.android.giphyassessment.databinding.AdapterGiphyBinding
 import com.android.giphyassessment.databinding.AdapterPaginationBinding
 import com.android.giphyassessment.feature.shared.model.GiphyModel
@@ -57,6 +59,23 @@ class GiphyAdapter(
                         .load(giphyItems.images?.downsized_medium?.url)
                         .into(binding.imvGiphy)
                 }
+
+                if (giphyItems.isFav == true) {
+                    binding.imbFav.setImageDrawable(context?.let {
+                        ContextCompat.getDrawable(
+                            it,
+                            R.drawable.ic_favorite
+                        )
+                    })
+                } else {
+                    binding.imbFav.setImageDrawable(context?.let {
+                        ContextCompat.getDrawable(
+                            it,
+                            R.drawable.ic_unfavorite
+                        )
+                    })
+                }
+
             }
 
             else -> {

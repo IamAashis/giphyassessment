@@ -1,5 +1,6 @@
 package com.android.giphyassessment.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,11 +14,11 @@ import com.android.giphyassessment.utils.constants.DbConstants
 @Dao
 interface AppDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun saveGiphyToDB(giphyModel: GiphyModel)
+    fun saveGiphyToDB(giphyModel: GiphyModel)
 
     @Query("SELECT * FROM ${DbConstants.giphy}")
-     fun getAllItems(): List<GiphyModel>
+   suspend fun getAllItems(): List<GiphyModel>
 
     @Query("DELETE FROM ${DbConstants.giphy} WHERE id = :itemId")
-     fun deleteById(itemId: Long)
+    fun deleteById(itemId: String)
 }

@@ -13,5 +13,6 @@ data class GiphyModel(
     var id: String? = null,
     var title: String? = null,
     var images: Images? = null,
-    var types: String? = "giphy"
+    var types: String? = "giphy",
+    var isFav: Boolean? = false
 )

@@ -51,7 +51,7 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
 
     private fun setup() {
         initRecyclerView()
-        giphyViewModel.getGiphy(1)
+        context?.let { giphyViewModel.getGiphy(it, 1) }
         initObserver()
         binding?.srlSwipeRefresh?.setOnRefreshListener(this)
     }
@@ -110,13 +110,22 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
     }
 
     override fun onRefresh() {
-        giphyViewModel.getGiphy(1)
+        context?.let { giphyViewModel.getGiphy(it, 1) }
     }
 
     private fun initRecyclerView() {
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         giphyAdapter = GiphyAdapter(context, giphyList) { position ->
-            context?.let { giphyViewModel.insertData(it, giphyList[position]) }
+
+            if (giphyList[position].isFav == true) {
+                context?.let { giphyViewModel.deleteGiphyById(it, giphyList[position].id ?: "") }
+                giphyList[position].isFav = false
+            } else {
+                context?.let { giphyViewModel.insertData(it, giphyList[position]) }
+                giphyList[position].isFav = true
+            }
+
+            giphyAdapter.notifyItemChanged(position)
         }
         binding?.rcvGiphy?.layoutManager = layoutManager
         binding?.rcvGiphy?.adapter = giphyAdapter
@@ -131,7 +140,10 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
             override fun loadMoreItems() {
                 isLoading = true
                 currentPage += 1
-                Handler().postDelayed({ giphyViewModel.getGiphy(currentPage) }, 1500)
+                Handler().postDelayed(
+                    { context?.let { giphyViewModel.getGiphy(it, currentPage) } },
+                    1500
+                )
             }
 
             override fun isFabSeen(): Boolean = true
