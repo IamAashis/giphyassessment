@@ -31,7 +31,7 @@ class FavAdapter(
         binding.imvGiphy.clipToOutline = true
 
         Glide.with(context)
-            .load(favItems.images?.downsized_medium?.url)
+            .load(favItems.images?.downsized_small?.url)
             .into(binding.imvGiphy)
 
  /*       if (favItems.isFav == true) {
