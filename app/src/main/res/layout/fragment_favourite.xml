@@ -13,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.android.giphyassessment.utils.customviews.RegularEditText
+    <com.android.giphyassessment.utils.customviews.RegularTextView
         android:id="@+id/txvGifs"
         android:layout_width="wrap_content"
         android:clickable="false"

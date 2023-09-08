@@ -40,10 +40,8 @@ class FavouriteViewModel @Inject constructor(
                 if (result != null) {
                     _giphyList.postValue(result)
                     _loading.postValue(false)
-                } else {
-
                 }
-            } catch (_: Exception) {
+            } catch (e: Exception) {
 
             } finally {
                 _loading.postValue(false)
