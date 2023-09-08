@@ -8,6 +8,8 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.giphyassessment.databinding.FragmentGiphyBinding
 import com.android.giphyassessment.feature.shared.adapters.GiphyAdapter
@@ -59,6 +61,10 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
         context?.let { giphyViewModel.getGiphy(it, 1) }
     }
 
+    fun clearEditText(){
+        binding?.edtSearch?.text?.clear()
+    }
+
     private fun initObserver() {
         giphyViewModel.giphyList.observe(viewLifecycleOwner) { response ->
 
@@ -85,6 +91,7 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
                         }
                     }
                     giphyAdapter.notifyDataSetChanged()
+                    binding?.rcvGiphy?.scrollToPosition(0)
                 } else {
                     giphyAdapter.removeLoadingFooter()
                     isLoading = false
@@ -132,11 +139,17 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
         }
         binding?.rcvGiphy?.layoutManager = layoutManager
         binding?.rcvGiphy?.adapter = giphyAdapter
+        (binding?.rcvGiphy?.itemAnimator as SimpleItemAnimator).changeDuration = 0
         binding?.rcvGiphy?.addOnScrollListener(object :
             PaginationScrollListener(layoutManager) {
             override fun getTotalPageCount(): Int = totalPages
             override fun getPerPageCount(): Int = perPage
             override fun isLastPage(): Boolean = isLastPage
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                hideKeyboard(binding?.rcvGiphy)
+            }
 
             override fun isLoading(): Boolean = isLoading
 
@@ -151,9 +164,6 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
 
             override fun isFabSeen(): Boolean = true
 
-            override fun showFabIcon() {}
-
-            override fun hideFabIcon() {}
         })
     }
 

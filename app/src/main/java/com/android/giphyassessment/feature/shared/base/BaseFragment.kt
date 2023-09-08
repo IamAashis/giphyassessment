@@ -9,6 +9,7 @@ import androidx.viewbinding.ViewBinding
 import com.android.giphyassessment.R
 import com.android.giphyassessment.utils.enums.ErrorEnum
 import com.android.giphyassessment.utils.util.DialogUtils
+import com.android.giphyassessment.utils.util.GlobalUtils
 
 /**
  * Created by Aashis on 06,September,2023
@@ -87,5 +88,9 @@ abstract class BaseFragment<BD : ViewBinding, VM : BaseViewModel> : Fragment() {
             getString(message ?: 0),
             { okAction?.invoke() },
             {})
+    }
+
+    fun hideKeyboard(view: View?) {
+        GlobalUtils.hideKeyboard(context, view)
     }
 }

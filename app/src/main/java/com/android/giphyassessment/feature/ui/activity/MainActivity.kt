@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                         val fragment = tabAdapter.getItem(0)
                         if (fragment is GiphyFragment) {
                             fragment.getTrendingData()
+                            fragment.clearEditText()
                         }
                     }
 

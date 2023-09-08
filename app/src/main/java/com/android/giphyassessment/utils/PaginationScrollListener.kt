@@ -43,8 +43,4 @@ abstract class PaginationScrollListener(var layoutManager: LinearLayoutManager) 
     abstract fun isLoading(): Boolean
 
     abstract fun isFabSeen(): Boolean
-
-    abstract fun showFabIcon()
-
-    abstract fun hideFabIcon()
 }
