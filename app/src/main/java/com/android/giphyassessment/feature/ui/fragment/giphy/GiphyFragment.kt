@@ -163,6 +163,7 @@ class GiphyFragment : BaseFragment<FragmentGiphyBinding, GiphyViewModel>(),
                 if (!p0.isNullOrEmpty()) {
                     context?.let {
                         giphyViewModel.searchGiphy(
+                            context,
                             1,
                             binding?.edtSearch?.text.toString(),
                         )

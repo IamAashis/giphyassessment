@@ -9,11 +9,9 @@ import com.android.giphyassessment.feature.shared.model.Giphy
 import com.android.giphyassessment.feature.shared.model.GiphyModel
 import com.android.giphyassessment.feature.shared.repository.GiphyRepository
 import com.android.giphyassessment.utils.DispatcherProvider
-import com.android.giphyassessment.utils.enums.Status
 import com.android.giphyassessment.utils.exceptions.onFailure
 import com.android.giphyassessment.utils.exceptions.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,56 +29,57 @@ class GiphyViewModel @Inject constructor(
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
 
-/*    private val _showError = MutableLiveData<String>()
-    val showError: LiveData<String> = _showError*/
+    /*    private val _showError = MutableLiveData<String>()
+        val showError: LiveData<String> = _showError*/
 
     fun getGiphy(context: Context, offset: Int) {
         viewModelScope.launch(dispatcher.io) {
             _loading.postValue(true)
 
-            val giphyResponse = async { giphyRepository.getGiphy(offset) }
-            val giphyDataLiveDatas = async { giphyRepository.getGiphyData(context) }
+            /*      val giphyResponse = async { giphyRepository.getGiphy(offset) }
+                  val giphyDataLiveDatas = async { giphyRepository.getGiphyData(context) }
 
-            val response = giphyResponse.await()
-            val responseDb = giphyDataLiveDatas.await()
-            val withFav = updateFavFromDb(response.data, responseDb)
-            if (response.status == Status.SUCCESS) {
-                _loading.postValue(false)
-                _giphyList.postValue(
-                    withFav
-                )
-            }
+                  val response = giphyResponse.await()
+                  val responseDb = giphyDataLiveDatas.await()
+                  val withFav = updateFavFromDb(response.data, responseDb)
+                  if (response.status == Status.SUCCESS) {
+                      _loading.postValue(false)
+                      _giphyList.postValue(
+                          withFav
+                      )
+                  }*/
 
-            /*   giphyRepository.getGiphy(offset)
-                   .onSuccess { eventData ->
-                       _loading.postValue(false)
-                       _eventList.postValue(
-                           eventData
-                       )
+            val giphyDataLiveDatas = giphyRepository.getGiphyData(context)
 
-                       val giphyDataLiveData = giphyRepository.getGiphyData(context)
+            giphyRepository.getGiphy(offset)
+                .onSuccess { responseData ->
+                    _loading.postValue(false)
+//                    _giphyList.postValue(
+//                        responseData
+//                    )
 
-                       // Observe the LiveData in the ViewModel
-                       giphyDataLiveData?.observeForever { giphyData ->
-                           Log.d("testDb", giphyData.toString())
-   //                        _giphyLiveData.postValue(giphyData)
-   //                        updateFavFromDb(eventData, giphyData)
-                       }
-                   }.onFailure { throwable ->
-                       _loading.postValue(false)
-                       performActionOnException(throwable) {}
-                   }*/
+                    val withFavResponse = updateFavFromDb(responseData, giphyDataLiveDatas)
+                    _giphyList.postValue(
+                        withFavResponse
+                    )
+
+                }.onFailure { throwable ->
+                    _loading.postValue(false)
+                    performActionOnException(throwable) {}
+                }
         }
     }
 
-    fun searchGiphy(offset: Int, search: String) {
+    fun searchGiphy(context: Context?, offset: Int, search: String) {
         viewModelScope.launch(dispatcher.io) {
             _loading.postValue(true)
+            val giphyDataLiveDatas = giphyRepository.getGiphyData(context)
             giphyRepository.searchGiphy(search, offset)
-                .onSuccess { eventData ->
+                .onSuccess { responseData ->
                     _loading.postValue(false)
+                    val withFavResponse = updateFavFromDb(responseData, giphyDataLiveDatas)
                     _giphyList.postValue(
-                        eventData
+                        withFavResponse
                     )
                 }.onFailure { throwable ->
                     _loading.postValue(false)
