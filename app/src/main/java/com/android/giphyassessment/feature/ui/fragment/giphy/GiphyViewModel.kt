@@ -29,34 +29,15 @@ class GiphyViewModel @Inject constructor(
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
 
-    /*    private val _showError = MutableLiveData<String>()
-        val showError: LiveData<String> = _showError*/
-
     fun getGiphy(context: Context, offset: Int) {
         viewModelScope.launch(dispatcher.io) {
             _loading.postValue(true)
-
-            /*      val giphyResponse = async { giphyRepository.getGiphy(offset) }
-                  val giphyDataLiveDatas = async { giphyRepository.getGiphyData(context) }
-
-                  val response = giphyResponse.await()
-                  val responseDb = giphyDataLiveDatas.await()
-                  val withFav = updateFavFromDb(response.data, responseDb)
-                  if (response.status == Status.SUCCESS) {
-                      _loading.postValue(false)
-                      _giphyList.postValue(
-                          withFav
-                      )
-                  }*/
 
             val giphyDataLiveDatas = giphyRepository.getGiphyData(context)
 
             giphyRepository.getGiphy(offset)
                 .onSuccess { responseData ->
                     _loading.postValue(false)
-//                    _giphyList.postValue(
-//                        responseData
-//                    )
 
                     val withFavResponse = updateFavFromDb(responseData, giphyDataLiveDatas)
                     _giphyList.postValue(

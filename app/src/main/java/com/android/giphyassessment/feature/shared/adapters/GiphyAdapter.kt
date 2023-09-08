@@ -56,7 +56,8 @@ class GiphyAdapter(
                 binding.imvGiphy.clipToOutline = true
                 context?.let {
                     Glide.with(it)
-                        .load(giphyItems.images?.downsized_small?.url)
+                        .load(giphyItems.images?.downsized_medium?.url)
+                        .placeholder(R.drawable.ic_placeholder)
                         .into(binding.imvGiphy)
                 }
 

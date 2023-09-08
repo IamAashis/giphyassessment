@@ -5,6 +5,6 @@ package com.android.giphyassessment.feature.shared.model
  */
 data class Images(
 //    var original: Original,
-//    var downsized_medium: Original,
-    var downsized_small: Original,
+    var downsized_medium: Original,
+//    var downsized_small: Original,
 )

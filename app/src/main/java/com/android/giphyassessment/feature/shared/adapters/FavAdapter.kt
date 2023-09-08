@@ -3,6 +3,7 @@ package com.android.giphyassessment.feature.shared.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.android.giphyassessment.R
 import com.android.giphyassessment.databinding.AdapterFavouriteBinding
 import com.android.giphyassessment.feature.shared.base.BaseAdapter
 import com.android.giphyassessment.feature.shared.model.GiphyModel
@@ -31,24 +32,9 @@ class FavAdapter(
         binding.imvGiphy.clipToOutline = true
 
         Glide.with(context)
-            .load(favItems.images?.downsized_small?.url)
+            .load(favItems.images?.downsized_medium?.url)
+            .placeholder(R.drawable.ic_placeholder)
             .into(binding.imvGiphy)
-
- /*       if (favItems.isFav == true) {
-            binding.imbFav.setImageDrawable(
-                ContextCompat.getDrawable(
-                    context,
-                    R.drawable.ic_favorite
-                )
-            )
-        } else {
-            binding.imbFav.setImageDrawable(
-                ContextCompat.getDrawable(
-                    context,
-                    R.drawable.ic_unfavorite
-                )
-            )
-        }*/
     }
 
     override fun getItemCount(): Int = favList.size

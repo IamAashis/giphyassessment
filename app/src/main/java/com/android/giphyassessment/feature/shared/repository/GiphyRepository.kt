@@ -74,5 +74,4 @@ class GiphyRepository @Inject constructor(private val api: ApiService) : BaseRep
             appDatabase?.appDao()?.deleteById(id)
         }
     }
-
 }
